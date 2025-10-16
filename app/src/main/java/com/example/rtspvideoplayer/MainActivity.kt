@@ -1,17 +1,22 @@
 package com.example.rtspvideoplayer
 
+import android.media.browse.MediaBrowser
 import android.widget.MediaController
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.VideoView
 import androidx.core.net.toUri
+import androidx.media3.common.MediaItem
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.rtsp.RtspMediaSource
+import androidx.media3.ui.PlayerView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var videoPlayer: VideoView
-    private lateinit var mediaController: MediaController
+    private lateinit var videoPlayer: PlayerView
+    private lateinit var player: ExoPlayer
+    private lateinit var mediaItem: MediaItem
     private val rtspUri = "rtsp://dev.gradotech.eu:8554/stream"
-    private val videoUri= "https://videos.pexels.com/video-files/8392764/8392764-hd_1080_1920_25fps.mp4"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,16 +25,16 @@ class MainActivity : AppCompatActivity() {
 
         videoPlayer = findViewById(R.id.videoPlayer)
 
-        val uri = videoUri.toUri()
+        player = ExoPlayer.Builder(applicationContext).build()
+        videoPlayer.player = player
 
-        videoPlayer.setVideoURI(uri)
+        val uri = rtspUri.toUri()
+        mediaItem = MediaItem.fromUri(uri)
 
-        mediaController = MediaController(this)
-        mediaController.setAnchorView(videoPlayer)
-        mediaController.setMediaPlayer(videoPlayer)
+        val mediaSource = RtspMediaSource.Factory().createMediaSource(mediaItem)
 
-        videoPlayer.setMediaController(mediaController)
-        videoPlayer.start()
+        player.setMediaSource(mediaSource)
+        player.prepare()
+        player.playWhenReady = true
     }
-
 }

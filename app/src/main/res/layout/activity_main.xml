@@ -22,11 +22,14 @@
                 android:layout_height="match_parent"
         />
     </com.google.android.material.appbar.AppBarLayout>
-    <VideoView
+    <androidx.media3.ui.PlayerView
+            android:id="@+id/videoPlayer"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" android:id="@+id/videoPlayer"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"/>
-
+            android:layout_height="match_parent"
+            app:use_controller="true"
+            app:resize_mode="fit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintVertical_bias="0.521"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
