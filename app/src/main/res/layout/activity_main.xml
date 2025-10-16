@@ -14,13 +14,13 @@
             android:fitsSystemWindows="true"
             android:id="@+id/appBarLayout" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent" android:background="#100B0B">
 
         <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-        />
+                android:background="#100B0B"/>
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.media3.ui.PlayerView
             android:id="@+id/videoPlayer"
